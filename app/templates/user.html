@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}login manager{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>Hello, {{ name }}!</h1>
+</div>
+<p>Current online session</p>
+<table class="table">
+    <tr>
+        <td> </td>
+        <td><strong>IP</strong></td>
+        <td><strong>User-Agent</strong></td>
+        <td><strong>Last Active</strong></td>
+        <td> </td>
+    </tr>
+    {% for s in sessions %}
+    <tr>
+        {% if s.lgsess==sid %}
+        <td>*</td>
+        {% else %}
+        <td> </td>
+        {% endif %}
+        <td>{{ s.ip_addr }}</td>
+        <td>{{ s.useragent }}</td>
+        <td>{{ s.last_active }}</td>
+        <td>
+            <form action="{{ url_for('main.logout_sid', sid = s.lgsess) }}">
+                <button class="btn btn-danger btn-sm" type="submit">Log Off</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

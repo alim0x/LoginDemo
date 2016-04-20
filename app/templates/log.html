@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}login manager{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>Hello, {{ name }}!</h1>
+</div>
+<p>Login history</p>
+<table class="table">
+    <tr>
+        <td> </td>
+        <td><strong>IP</strong></td>
+        <td><strong>User-Agent</strong></td>
+        <td><strong>Last Active</strong></td>
+    </tr>
+    {% for s in sessions %}
+    <tr>
+        {% if s.lgsess==sid %}
+        <td>*</td>
+        {% else %}
+        <td> </td>
+        {% endif %}
+        <td>{{ s.ip_addr }}</td>
+        <td>{{ s.useragent }}</td>
+        <td>{{ s.last_active }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
